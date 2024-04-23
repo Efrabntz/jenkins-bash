@@ -6,11 +6,15 @@ pipeline {
     }
 
     stages {
+        stage('Preparar') {
+            steps {
+                // Dar permisos de ejecución al archivo main.sh
+                sh 'chmod +x main.sh'
+            }
+        }
+        
         stage('Ejecutar script') {
             steps {
-                // Clonar el repositorio donde se encuentra el script
-                git 'https://ruta.a.tu/repositorio.git'
-
                 // Ejecutar el script main.sh con el nombre del proceso como parámetro
                 sh "./main.sh ${params.process_name}"
             }
